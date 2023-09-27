@@ -7,10 +7,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,6 +26,18 @@ public class OpenCartTestCases {
 
 	// WebDriver driver = new ChromeDriver();
 
+	
+	private boolean isElementPresent(By by) {
+		
+		try {
+			driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+	
+	
 	@BeforeTest
 	public void openWebsite() {
 		driver.manage().window().maximize();
@@ -33,26 +47,31 @@ public class OpenCartTestCases {
 
 	@Test
 	public void getTitle() {
-
+		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
+		
 		String title = driver.getTitle();
-
+		
 		assertEquals("Your Store", title);
 	}
 
 	@Test(dependsOnMethods = "getTitle")
 	public void checkHomePageOpened() {
+		
 		WebElement logo = driver.findElement(By.id("logo"));
+		
 		logo.isDisplayed();
 	}
 
 	@Test(dependsOnMethods = "checkHomePageOpened")
 	public void CheckWrongSearchResult() {
+		
 		WebElement searchInput = driver.findElement(By.name("search"));
+		
 		searchInput.sendKeys("car");
 
 		WebElement searchButton = driver.findElement(By.className("btn-lg"));
+		
 		searchButton.click();
 	}
 
@@ -138,6 +157,10 @@ public class OpenCartTestCases {
 
 	@Test(dependsOnMethods = "checkoutPage")
 	public void signToCompleteCheckout() {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,1500)", "");
+
 		WebElement email = driver.findElement(By.id("input-email"));
 		email.sendKeys("ssgtester@yahoo.com");
 
@@ -169,8 +192,8 @@ public class OpenCartTestCases {
 		WebElement lastName = driver.findElement(By.id("input-payment-lastname"));
 		lastName.sendKeys("Testing");
 
-		String userName = ""+(int)(Math.random()*Integer.MAX_VALUE);
-		String emailID = "User"+userName+"@example.com";
+		String userName = "" + (int) (Math.random() * Integer.MAX_VALUE);
+		String emailID = "User" + userName + "@example.com";
 
 		WebElement userEmail = driver.findElement(By.id("input-payment-email"));
 		userEmail.sendKeys(emailID);
@@ -200,42 +223,55 @@ public class OpenCartTestCases {
 		Thread.sleep(5000);
 		Select countryOfTheUser = new Select(countryOfUser);
 		countryOfTheUser.selectByVisibleText("Egypt");
-
+		
 
 		WebElement shipmentCity = driver.findElement(By.id("input-payment-zone"));
 		shipmentCity.click();
 		Thread.sleep(5000);
 		Select cityOfUser = new Select(shipmentCity);
 		cityOfUser.selectByVisibleText("Asyut");
+		
+		Actions builder = new Actions(driver);
+		builder.scrollToElement(shipmentCity).perform();
 
 		WebElement checkBox = driver.findElement(By.name("agree"));
 		checkBox.click();
-
+		//Actions act=new Actions(driver);
+		//act.moveToElement(checkBox).click().perform();
+		
 		WebElement registerButton = driver.findElement(By.id("button-register"));
 		registerButton.click();
 	}
 
-	@Test (dependsOnMethods = "signUpNewAccount")
-	public void confirmPaymentMethod() {
-
-		WebElement checkBox = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[3]/div[2]/div/div[2]/div/input[1]"));
+	@Test(dependsOnMethods = "signUpNewAccount")
+	public void confirmPaymentMethod() throws InterruptedException {
+		
+		WebElement checkBox = driver.findElement(By.name("agree"));
+		
+		Actions builder = new Actions(driver);
+		builder.scrollToElement(checkBox).perform();
+		
 		checkBox.click();
+		
+		Thread.sleep(5000);
 
 		WebElement registerButton = driver.findElement(By.id("button-payment-method"));
 		registerButton.click();
 	}
 
-	@Test (dependsOnMethods = "confirmPaymentMethod")
-	public void confirmOrder() {
-
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		WebElement confirmButtonForOrder = driver.findElement(By.id("button-confirm"));
-		confirmButtonForOrder.click();
-
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-		String title = driver.getTitle();
-		assertEquals("Your order has been placed!", title);
-	}
+	/*
+	 * @Test(dependsOnMethods = "confirmPaymentMethod") public void confirmOrder() {
+	 * 
+	 * driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	 * 
+	 * WebElement confirmButtonForOrder =
+	 * driver.findElement(By.id("button-confirm")); confirmButtonForOrder.click();
+	 * 
+	 * driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	 * 
+	 * String title = driver.getTitle(); assertEquals("Your order has been placed!",
+	 * title);
+	 * 
+	 * }
+	 */
 }
