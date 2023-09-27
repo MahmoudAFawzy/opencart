@@ -3,21 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="E_Commerce.opencart.OpenCartTestCases">
+      <class name="E_Commerce.opencart.WorkingWithConfirmAlert">
         <methods>
-          <include name="getTitle"/>
-          <include name="signToCompleteCheckout"/>
-          <include name="signUpNewAccount"/>
-          <include name="comparePrice"/>
-          <include name="checkAddToCart"/>
-          <include name="checkoutPage"/>
-          <include name="CheckWrongSearchResult"/>
-          <include name="checkHomePageOpened"/>
           <include name="openWebsite"/>
-          <include name="happyCaseCheckSearch"/>
-          <include name="confirmPaymentMethod"/>
+          <include name="rejectingAlert"/>
         </methods>
-      </class> <!-- E_Commerce.opencart.OpenCartTestCases -->
+      </class> <!-- E_Commerce.opencart.WorkingWithConfirmAlert -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

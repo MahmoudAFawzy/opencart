@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-09-22T01:38:51 EET" name="Default suite" finished-at="2023-09-22T01:38:54 EET" duration-ms="2879">
+  <suite started-at="2023-09-27T19:30:56 EET" name="Default suite" finished-at="2023-09-27T19:31:08 EET" duration-ms="11420">
     <groups>
     </groups>
-    <test started-at="2023-09-22T01:38:51 EET" name="Default test" finished-at="2023-09-22T01:38:54 EET" duration-ms="2879">
-      <class name="E_Commerce.opencart.WorkingWithPromptAlert">
-        <test-method is-config="true" signature="openWebsite()[pri:0, instance:E_Commerce.opencart.WorkingWithPromptAlert@57f64f5e]" started-at="2023-09-22T01:38:51 EET" name="openWebsite" finished-at="2023-09-22T01:38:53 EET" duration-ms="2192" status="PASS">
+    <test started-at="2023-09-27T19:30:56 EET" name="Default test" finished-at="2023-09-27T19:31:08 EET" duration-ms="11420">
+      <class name="E_Commerce.opencart.WorkingWithConfirmAlert">
+        <test-method is-config="true" signature="openWebsite()[pri:0, instance:E_Commerce.opencart.WorkingWithConfirmAlert@194152cf]" started-at="2023-09-27T19:30:56 EET" name="openWebsite" finished-at="2023-09-27T19:30:58 EET" duration-ms="1100" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openWebsite -->
-        <test-method signature="acceptingAlert()[pri:0, instance:E_Commerce.opencart.WorkingWithPromptAlert@57f64f5e]" started-at="2023-09-22T01:38:53 EET" name="acceptingAlert" finished-at="2023-09-22T01:38:54 EET" duration-ms="636" status="PASS">
+        <test-method signature="acceptingAlert()[pri:0, instance:E_Commerce.opencart.WorkingWithConfirmAlert@194152cf]" started-at="2023-09-27T19:30:58 EET" name="acceptingAlert" finished-at="2023-09-27T19:31:03 EET" duration-ms="5193" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- acceptingAlert -->
-      </class> <!-- E_Commerce.opencart.WorkingWithPromptAlert -->
+        <test-method signature="rejectingAlert()[pri:1, instance:E_Commerce.opencart.WorkingWithConfirmAlert@194152cf]" started-at="2023-09-27T19:31:03 EET" name="rejectingAlert" finished-at="2023-09-27T19:31:08 EET" duration-ms="5088" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- rejectingAlert -->
+      </class> <!-- E_Commerce.opencart.WorkingWithConfirmAlert -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
